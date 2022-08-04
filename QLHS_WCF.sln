@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAO", "DAO\DAO.csproj", "{072DE229-9D56-4AC0-BCAC-A80EC24AF7A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BUS", "BUS\BUS.csproj", "{5672E5C8-1BA2-425E-A403-D5534DFC2F82}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BUS", "BUS\BUS.csproj", "{6807F965-B64B-4BE4-8445-E18A20326DB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{072DE229-9D56-4AC0-BCAC-A80EC24AF7A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{072DE229-9D56-4AC0-BCAC-A80EC24AF7A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{072DE229-9D56-4AC0-BCAC-A80EC24AF7A5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5672E5C8-1BA2-425E-A403-D5534DFC2F82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5672E5C8-1BA2-425E-A403-D5534DFC2F82}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5672E5C8-1BA2-425E-A403-D5534DFC2F82}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5672E5C8-1BA2-425E-A403-D5534DFC2F82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6807F965-B64B-4BE4-8445-E18A20326DB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6807F965-B64B-4BE4-8445-E18A20326DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6807F965-B64B-4BE4-8445-E18A20326DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6807F965-B64B-4BE4-8445-E18A20326DB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

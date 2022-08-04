@@ -25,11 +25,10 @@ namespace DAO
         #endregion
 
         #region: Inserting
-        public bool InsertStudent(StudentDTO student, string err)
+        public bool InsertStudent(StudentDTO student)
         {
             bool result = dah.ExecuteNonQuery("spInsertStudent",
                 CommandType.StoredProcedure,
-                ref err,
                 new SqlParameter("@StudentID", student.StudentID),
                 new SqlParameter("@StudentName", student.StudentName),
                 new SqlParameter("@Sex", student.Sex),
@@ -42,11 +41,10 @@ namespace DAO
 
 
         #region: Updating
-        public bool UpdateStudent(StudentDTO student, string err)
+        public bool UpdateStudent(StudentDTO student)
         {
             bool result = dah.ExecuteNonQuery("spUpdateStudent",
                 CommandType.StoredProcedure,
-                ref err,
                  new SqlParameter("@StudentID", student.StudentID),
                 new SqlParameter("@StudentName", student.StudentName),
                 new SqlParameter("@Sex", student.Sex),
@@ -59,12 +57,11 @@ namespace DAO
         #endregion
 
         #region: Deleting
-        public bool DeleteStudent(StudentDTO student, string err)
+        public bool DeleteStudent(StudentDTO student)
         {
             bool result = dah.ExecuteNonQuery(
             "spDeleteStudent",
             CommandType.StoredProcedure,
-            ref err,
             new SqlParameter("@StudentID", student.StudentID)
             );
             return result;

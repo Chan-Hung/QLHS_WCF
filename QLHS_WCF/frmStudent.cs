@@ -46,7 +46,7 @@ namespace QLHS_WCF
             StudentDTO studentDTO = new StudentDTO();
             TakeInput(studentDTO);
             string err = "";
-            if (!obj.InsertStudent(studentDTO, err))
+            if (!obj.InsertStudent(studentDTO))
             {
                 MessageBox.Show(err, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -67,7 +67,7 @@ namespace QLHS_WCF
             StudentDTO studentDTO = new StudentDTO();
             TakeInput(studentDTO);
             string err = "";
-            if (!obj.UpdateStudent(studentDTO, err))
+            if (!obj.UpdateStudent(studentDTO))
             {
                 MessageBox.Show(err, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -100,7 +100,7 @@ namespace QLHS_WCF
                 StudentDTO studentDTO = new StudentDTO();
             TakeInput(studentDTO);
                
-                if (!obj.DeleteStudent(studentDTO, err))
+                if (!obj.DeleteStudent(studentDTO))
                 {
                     MessageBox.Show(err, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }

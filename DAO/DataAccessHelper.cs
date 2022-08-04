@@ -47,7 +47,7 @@ namespace DAO
         }
 
         public bool ExecuteNonQuery(string strSQL,
-            CommandType ct, ref string error,
+            CommandType ct,
             params SqlParameter[] param)
         {
             //Co f la gia tri tra ve
@@ -71,7 +71,7 @@ namespace DAO
             }
             catch (SqlException ex)
             {
-                error = ex.Message;
+                Console.WriteLine(ex);
             }
             finally
             {
