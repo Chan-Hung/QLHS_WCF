@@ -15,13 +15,20 @@ namespace DAO
     {
         DataAccessHelper dah = new DataAccessHelper();
         #region: Retrieving
-        public DataTable SelectStudent()
+
+        public List<StudentDTO> SelectAllStudents()
         {
-            string sql = "select * from Student";
-            DataTable dt = new DataTable();
-            dt = dah.GetTable(sql);
-            return dt;
+            List<StudentDTO> listStudent = new List<StudentDTO>();
+            DataTable dtStudent = dah.GetTable("SELECT * FROM Student");
+            foreach(DataRow item in dtStudent.Rows)
+            {
+                StudentDTO stu = new StudentDTO(item);
+                listStudent.Add(stu);
+            }
+
+            return listStudent;
         }
+
         #endregion
 
         #region: Inserting

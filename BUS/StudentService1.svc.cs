@@ -15,9 +15,9 @@ namespace BUS
     public class StudentService1 : IStudentService1
     {
         StudentDAO studentDAO = new StudentDAO();
-        public DataTable SelectStudent()
+        public List<StudentDTO> SelectAllStudents()
         {
-            return studentDAO.SelectStudent();
+            return studentDAO.SelectAllStudents();
         }
         public bool InsertStudent(StudentDTO student)
         {
@@ -33,8 +33,6 @@ namespace BUS
             return studentDAO.DeleteStudent(student);
         }
 
-       
-
-       
+        
     }
 }

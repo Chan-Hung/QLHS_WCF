@@ -59,7 +59,19 @@ namespace QLHS_WCF
 
         private void frmStudent_Load(object sender, EventArgs e)
         {
-            dgvStudent.DataSource = obj.SelectStudent();
+            StudentService1 obj = new StudentService1();
+            List<StudentDTO> listStudent = obj.SelectAllStudents();
+            foreach (var item in listStudent)
+            {
+
+
+                dgvStudent.Rows.Add(item.StudentID,
+                    item.StudentName,
+                    item.Sex,
+                    item.Email,
+                    item.DateOfBirth,
+                    item.DateOfBirth);
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
