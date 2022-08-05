@@ -24,6 +24,10 @@ namespace QLHS_WCF
         {
             InitializeComponent();
         }
+
+        //Ẩn URL trong file Config.xml
+        //Địa chỉ của file xml: D:\NH_Solutions\QLHS_WCF\QLHS_WCF\bin\Debug
+        //Việc ẩn các URL giúp việc fix bug và bảo mật hơn
         public static string GetURIFromXMLFile(string sql)
         {
             XmlDocument doc = new XmlDocument();
@@ -40,6 +44,8 @@ namespace QLHS_WCF
             return nodeLst.Item(0).InnerText;
 
         }
+
+        //Hàm lấy data từ trường textbox và fill vào object
         private void TakeInput(StudentDTO studentDTO)
         {
             studentDTO.StudentID = txtStudentID.Text;
@@ -64,9 +70,11 @@ namespace QLHS_WCF
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
+            //Khởi tạo đối tượng studentDTO từ class cùng tên
             StudentDTO studentDTO = new StudentDTO();
             TakeInput(studentDTO);
 
+            //Web client cho phép send/receive data từ URI
             WebClient webClient = new WebClient();
             webClient.Headers["Content-type"] = "application/json";
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(StudentDTO));
@@ -74,11 +82,15 @@ namespace QLHS_WCF
             ser.WriteObject(mem, studentDTO);
             string data = Encoding.UTF8.GetString(mem.ToArray(), 0, (int)mem.Length);
             
+            //Chuỗi URI thực sự gọi từ hàm GetURIFromXMLFile
             string uriInsert = GetURIFromXMLFile("Insert");
             webClient.UploadString(uriInsert, "POST", data);
             btnRefresh_Click(sender, e);
         }
 
+
+        //Hàm này lấy dữ liệu và fill vào list result (là 1 list các đối tượng studentDTO
+        //Định nghĩa hàm: WCF RESTful Service https://www.c-sharpcorner.com/article/wcf-restful-service/#:~:text=RESTful%20service%20follows%20the%20REST,mechanism%20like%20SOAP%20for%20communication
         void proxy_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             Stream stream = new MemoryStream(Encoding.Unicode.GetBytes(e.Result));
