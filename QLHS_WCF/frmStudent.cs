@@ -12,6 +12,8 @@ using BUS;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Json;
+using System.Xml;
+using System.Reflection;
 
 namespace QLHS_WCF
 {
@@ -22,7 +24,22 @@ namespace QLHS_WCF
         {
             InitializeComponent();
         }
+        public static string GetURIFromXMLFile(string sql)
+        {
+            XmlDocument doc = new XmlDocument();
+            try
+            {
+                doc.Load(Application.StartupPath + "\\Config.xml");
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(MethodBase.GetCurrentMethod().Name + ": " + ex.Message, "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            XmlNodeList nodeLst = doc.GetElementsByTagName(sql);
+            return nodeLst.Item(0).InnerText;
+
+        }
         private void TakeInput(StudentDTO studentDTO)
         {
             studentDTO.StudentID = txtStudentID.Text;
@@ -49,14 +66,16 @@ namespace QLHS_WCF
         {
             StudentDTO studentDTO = new StudentDTO();
             TakeInput(studentDTO);
+
+            WebClient webClient = new WebClient();
+            webClient.Headers["Content-type"] = "application/json";
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(StudentDTO));
             MemoryStream mem = new MemoryStream();
             ser.WriteObject(mem, studentDTO);
             string data = Encoding.UTF8.GetString(mem.ToArray(), 0, (int)mem.Length);
-            WebClient webClient = new WebClient();
-            webClient.Headers["Content-type"] = "application/json";
-            webClient.Encoding = Encoding.UTF8;
-            webClient.UploadString("http://localhost:53431/StudentService1.svc/InsertStudent", "POST", data);
+            
+            string uriInsert = GetURIFromXMLFile("Insert");
+            webClient.UploadString(uriInsert, "POST", data);
             btnRefresh_Click(sender, e);
         }
 
@@ -72,7 +91,8 @@ namespace QLHS_WCF
         private void frmStudent_Load(object sender, EventArgs e)
         {        
             WebClient proxy = new WebClient();
-            proxy.DownloadStringAsync(new Uri("http://localhost:53431/StudentService1.svc/SelectAllStudents"));
+            string UriSelect = GetURIFromXMLFile("Select");
+            proxy.DownloadStringAsync(new Uri(UriSelect));
             proxy.DownloadStringCompleted += proxy_DownloadStringCompleted;
 
         }
@@ -81,14 +101,15 @@ namespace QLHS_WCF
         {
             StudentDTO studentDTO = new StudentDTO();
             TakeInput(studentDTO);
+
             WebClient client = new WebClient();
             client.Headers["Content-type"] = "application/json";
 
             MemoryStream ms = new MemoryStream();
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(StudentDTO));
             ser.WriteObject(ms, studentDTO);
-
-            client.UploadData("http://localhost:53431/StudentService1.svc/UpdateStudent", "PUT", ms.ToArray());
+            string uriUpdate = GetURIFromXMLFile("Update");
+            client.UploadData(uriUpdate, "PUT", ms.ToArray());
             btnRefresh_Click(sender, e);
         }
 
@@ -119,7 +140,8 @@ namespace QLHS_WCF
                 MemoryStream ms = new MemoryStream();
                 DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(string));
                 ser.WriteObject(ms, txtStudentID.Text);
-                byte[] data = client.UploadData("http://localhost:53431/StudentService1.svc/DeleteStudent", "DELETE", ms.ToArray());
+                string uriDelete = GetURIFromXMLFile("Delete");
+                byte[] data = client.UploadData(uriDelete, "DELETE", ms.ToArray());
                 btnRefresh_Click(sender, e);
             }
             
