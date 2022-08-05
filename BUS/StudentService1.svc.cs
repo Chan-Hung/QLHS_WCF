@@ -28,9 +28,9 @@ namespace BUS
         {
             return studentDAO.UpdateStudent(student);
         }
-        public bool DeleteStudent(StudentDTO student)
+        public bool DeleteStudent(string studentid)
         {
-            return studentDAO.DeleteStudent(student);
+            return studentDAO.DeleteStudent(studentid);
         }
 
         

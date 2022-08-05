@@ -64,12 +64,12 @@ namespace DAO
         #endregion
 
         #region: Deleting
-        public bool DeleteStudent(StudentDTO student)
+        public bool DeleteStudent(string studentID)
         {
             bool result = dah.ExecuteNonQuery(
             "spDeleteStudent",
             CommandType.StoredProcedure,
-            new SqlParameter("@StudentID", student.StudentID)
+            new SqlParameter("@StudentID", studentID)
             );
             return result;
         }

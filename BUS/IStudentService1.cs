@@ -15,17 +15,20 @@ namespace BUS
     public interface IStudentService1
     {        
         [OperationContract]
-        [WebGet(UriTemplate = "SelectAllStudents", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "/SelectAllStudents", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         List<StudentDTO> SelectAllStudents();
 
         [OperationContract]
+        [WebInvoke(UriTemplate = "/InsertStudent", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
         bool InsertStudent(StudentDTO student);
 
         [OperationContract]
+        [WebInvoke(UriTemplate = "/UpdateStudent",Method = "PUT", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         bool UpdateStudent(StudentDTO student);
 
         [OperationContract]
-        bool DeleteStudent(StudentDTO student);
+        [WebInvoke(UriTemplate = "/DeleteStudent", Method = "DELETE", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        bool DeleteStudent(string studentid);
     }
 
     [DataContract]
